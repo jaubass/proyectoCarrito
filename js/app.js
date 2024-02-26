@@ -36,25 +36,45 @@ function leerDatosCurso(curso) {
 
         
     }
-    // console.log(infoCurso)
-    // Agregar datos al carrito
-    articulosCarrito = [...articulosCarrito, infoCurso];
-    console.log(articulosCarrito);
-    carritoHTML();
+
+
+// console.log(infoCurso)
+// Agregar datos al carrito
+articulosCarrito = [...articulosCarrito, infoCurso];
+console.log(articulosCarrito);
+carritoHTML();
 }
 
-// Muestra el HTLM al carrito
 
+// Muestra el HTLM al carrito
 function carritoHTML() {
+
+    // Limpiar HTML
+    limpiarHTML();
+
     articulosCarrito.forEach( curso => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>
-                ${curso.titulo}
-            </td>
+            <td><img src="${curso.imagen}" width="100"></td>
+            <td>${curso.titulo}</td>
+            <td>${curso.precio}</td>
+            <td>${curso.cantidad}</td>
+            <td><a href="#" class="borrar-curso" data-id="${curso.id}"> X </a></td>
         `;
 
         // Agregar el HTML del carrito en el tbody del index.html
         contenedorCarrito.appendChild(row);
     })
+}
+
+
+// Eliminar los cursos del Tbody para que no se dupliquen al utilizar el spread operator y trabajar con cópias de articulosCarrito 
+function limpiarHTML() {
+    // Forma lenta de elimar el html 
+    // contenedorCarrito.innerHTML = '';
+
+    // Limpiar carrito con mejor perfomance, mientras tenga un elemento hijo el bucle se ejecutará
+    while(contenedorCarrito.firstChild) {
+        contenedorCarrito.removeChild(contenedorCarrito.firstChild)
+    }
 }
