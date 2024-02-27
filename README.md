@@ -6,3 +6,5 @@
 - Funciones
 - Selectores
 - Objetos
+
+[Ver proyecto desplegado en Netlify](https://project-cart-js.netlify.app)
